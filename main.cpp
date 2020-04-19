@@ -338,7 +338,7 @@ int RedisSortedSet::ZADD(int val, string key)
 }
 
 // This function returns the rank of particular key in RedisSortedSet
-// Time Complexity : O(1)
+// Time Complexity : O(log(N))
 int RedisSortedSet::ZRANK(string key)
 {
     if(mp2.find(key)==mp2.end())
