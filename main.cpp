@@ -71,7 +71,7 @@ class RedisSortedSet
         int ZRANK(string);
 };
 
-// This function take key as input and return the length of the value of that key
+// This function take key as input and return the length of the value of that key if the key exists otherwise 0
 int RedisString::STRLEN(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -80,7 +80,7 @@ int RedisString::STRLEN(string key)
     return 0;
 }
 
-// This function adds the key value pair
+// This function adds the key value pair and returns OK
 string RedisString::set(string key, string value)
 {
     mp[key] = value;
@@ -88,7 +88,7 @@ string RedisString::set(string key, string value)
     return "OK";
 }
 
-// This function return the string associated with that key
+// This function return the string associated with that key if the key exists ohterwise NULL
 string RedisString::get(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -97,7 +97,7 @@ string RedisString::get(string key)
     return "NULL";
 }
 
-// This function appends the given value with the associated key value
+// This function appends the given value with the associated key value and returns the length of the string
 int RedisString::append(string key, string val)
 {
     if(mp.find(key)!=mp.end())
@@ -112,7 +112,7 @@ int RedisString::append(string key, string val)
     return STRLEN(key);
 }
 
-// This function Push the node at the end of the list
+// This function Push the node at the end of the list and returns the len of the list
 int RedisList::RPUSH(string val)
 {
     if(!head)
@@ -140,7 +140,7 @@ int RedisList::RPUSH(string val)
     return coun;
 }
 
-// This function Push the node at the front of the list
+// This function Push the node at the front of the list and returns the len of the list
 int RedisList::LPUSH(string val)
 {
     if(!head)
@@ -166,7 +166,7 @@ int RedisList::LPUSH(string val)
     return coun;
 }
 
-// This function the value of the node at given index of the list
+// This function the value of the node at given index of the list otherwise nil
 string RedisList::LINDEX(int index)
 {
     if(index==0 || index+coun == 0)
@@ -201,7 +201,7 @@ int RedisList::LLEN()
     return coun;
 }
 
-// This function Pop the node from the front of the list
+// This function Pop the node from the front of the list return it's value if it exist otherwise nil
 string RedisList::LPOP()
 {
     if(head == NULL)
@@ -216,14 +216,14 @@ string RedisList::LPOP()
     return s;
 }
 
-// This function key value pair in the RedisHash
+// This function key value pair in the RedisHash and return 1
 int RedisHash::HSET(string key, string val)
 {
     mp[key] = val;
     return 1;
 }
 
-// This function return the value associated with the key
+// This function return the value associated with the key if the key exists otherwise nil
 string RedisHash::HGET(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -238,13 +238,16 @@ int RedisHash::HLEN()
     return mp.size();
 }
 
-// This function return the length of string associated with key in the RedisHash
+// This function return the length of string associated with key in the RedisHash if the key exist otherwise 0
 int RedisHash::HSTRLEN(string key)
 {
+    if(mp.find(key)==mp.end())
+    return 0;
+    
     return mp[key].size();
 }
 
-// This function key exist or not in the RedisHash
+// This function checks if the key exist or not in the RedisHash and return 1 if it exist otherwise 0
 int RedisHash::HEXISTS(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -253,7 +256,7 @@ int RedisHash::HEXISTS(string key)
     return 0;
 }
 
-// This function check whether key exist in RedisSet or not
+// This function check whether key exist in RedisSet or not and return 1 if the key exists otherwise 0
 int RedisSet::SISMEMBER(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -263,7 +266,7 @@ int RedisSet::SISMEMBER(string key)
     return 0;
 }
 
-// This function add key value pair in the RedisSet
+// This function add key value pair in the RedisSet and return 1 if the key does not exist otherwise 0
 int RedisSet::SADD(string key)
 {
  if(mp.find(key)!=mp.end())
@@ -275,7 +278,7 @@ int RedisSet::SADD(string key)
  return 1;
 }
 
-// This function remove key from the RedisSet if it exists
+// This function remove key from the RedisSet if it exists and return 1 otherwise 0
 int RedisSet::SREM(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -290,7 +293,7 @@ int RedisSet::SREM(string key)
     return 0;
 }
 
-// This function remove key from the RedisSortedSet if it exists
+// This function remove key from the RedisSortedSet and return 1 if the key exists otherwise 0
 int RedisSortedSet::ZREM(string key)
 {
     if(mp2.find(key)==mp2.end())
@@ -305,7 +308,7 @@ int RedisSortedSet::ZREM(string key)
     return 1;
 }
 
-// This function Add key,value pair in the RedisSortedSet 
+// This function Add key,value pair in the RedisSortedSet and return 1 if the key exists otherwise 0
 int RedisSortedSet::ZADD(int val, string key)
 {
     if(mp1.find(val)!=mp1.end())
@@ -317,7 +320,7 @@ int RedisSortedSet::ZADD(int val, string key)
     return 1;
 }
 
-// This function returns the rank of particular key in RedisSortedSet
+// This function returns the rank of particular key in RedisSortedSet if the key exists otherwise -1
 int RedisSortedSet::ZRANK(string key)
 {
     if(mp2.find(key)==mp2.end())
