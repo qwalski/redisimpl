@@ -5,7 +5,7 @@ using namespace std;
 // class for RedisString Data structure
 class RedisString
 {
-    map<string,string> mp;
+    unordered_map<string,string> mp;
     public :
         int STRLEN(string);
         string set(string,string);
@@ -37,7 +37,7 @@ class RedisList
 // class for RedisHash Data structure
 class RedisHash
 {
-    map<string,string> mp;
+    unordered_map<string,string> mp;
     
     public :
         int HSET(string,string);
@@ -51,7 +51,7 @@ class RedisHash
 class RedisSet
 {
     list<string> dq;
-    map<string,list<string> :: iterator> mp;
+    unordered_map<string,list<string> :: iterator> mp;
     
     public :
         
