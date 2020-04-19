@@ -72,7 +72,6 @@ class RedisSortedSet
 };
 
 // This function take key as input and return the length of the value of that key
-// Time Complexity : O(1)
 int RedisString::STRLEN(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -82,7 +81,6 @@ int RedisString::STRLEN(string key)
 }
 
 // This function adds the key value pair
-// Time Complexity : O(1)
 string RedisString::set(string key, string value)
 {
     mp[key] = value;
@@ -91,7 +89,6 @@ string RedisString::set(string key, string value)
 }
 
 // This function return the string associated with that key
-// Time Complexity : O(1)
 string RedisString::get(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -101,7 +98,6 @@ string RedisString::get(string key)
 }
 
 // This function appends the given value with the associated key value
-// Time Complexity : O(1)
 int RedisString::append(string key, string val)
 {
     if(mp.find(key)!=mp.end())
@@ -117,7 +113,6 @@ int RedisString::append(string key, string val)
 }
 
 // This function Push the node at the end of the list
-// Time Complexity : O(1)
 int RedisList::RPUSH(string val)
 {
     if(!head)
@@ -146,7 +141,6 @@ int RedisList::RPUSH(string val)
 }
 
 // This function Push the node at the front of the list
-// Time Complexity : O(1)
 int RedisList::LPUSH(string val)
 {
     if(!head)
@@ -173,8 +167,6 @@ int RedisList::LPUSH(string val)
 }
 
 // This function the value of the node at given index of the list
-// Time Complexity : O(N) where N is the index
-// Time Complexity : O(1) if N is first or last index
 string RedisList::LINDEX(int index)
 {
     if(index==0 || index+coun == 0)
@@ -204,14 +196,12 @@ string RedisList::LINDEX(int index)
 }
 
 // This function returns length of the list
-// Time Complexity : O(1)
 int RedisList::LLEN()
 {
     return coun;
 }
 
 // This function Pop the node from the front of the list
-// Time Complexity : O(1)
 string RedisList::LPOP()
 {
     if(head == NULL)
@@ -227,7 +217,6 @@ string RedisList::LPOP()
 }
 
 // This function key value pair in the RedisHash
-// Time Complexity : O(1)
 int RedisHash::HSET(string key, string val)
 {
     mp[key] = val;
@@ -235,7 +224,6 @@ int RedisHash::HSET(string key, string val)
 }
 
 // This function return the value associated with the key
-// Time Complexity : O(1)
 string RedisHash::HGET(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -245,21 +233,18 @@ string RedisHash::HGET(string key)
 }
 
 // This function return the number of key value pair in the RedisHash
-// Time Complexity : O(1)
 int RedisHash::HLEN()
 {
     return mp.size();
 }
 
 // This function return the length of string associated with key in the RedisHash
-// Time Complexity : O(1)
 int RedisHash::HSTRLEN(string key)
 {
     return mp[key].size();
 }
 
 // This function key exist or not in the RedisHash
-// Time Complexity : O(1)
 int RedisHash::HEXISTS(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -269,7 +254,6 @@ int RedisHash::HEXISTS(string key)
 }
 
 // This function check whether key exist in RedisSet or not
-// Time Complexity : O(1)
 int RedisSet::SISMEMBER(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -280,7 +264,6 @@ int RedisSet::SISMEMBER(string key)
 }
 
 // This function add key value pair in the RedisSet
-// Time Complexity : O(1)
 int RedisSet::SADD(string key)
 {
  if(mp.find(key)!=mp.end())
@@ -293,7 +276,6 @@ int RedisSet::SADD(string key)
 }
 
 // This function remove key from the RedisSet if it exists
-// Time Complexity : O(1)
 int RedisSet::SREM(string key)
 {
     if(mp.find(key)!=mp.end())
@@ -309,7 +291,6 @@ int RedisSet::SREM(string key)
 }
 
 // This function remove key from the RedisSortedSet if it exists
-// Time Complexity : O(log(N)
 int RedisSortedSet::ZREM(string key)
 {
     if(mp2.find(key)==mp2.end())
@@ -325,7 +306,6 @@ int RedisSortedSet::ZREM(string key)
 }
 
 // This function Add key,value pair in the RedisSortedSet 
-// Time Complexity : O(log(N))
 int RedisSortedSet::ZADD(int val, string key)
 {
     if(mp1.find(val)!=mp1.end())
@@ -338,7 +318,6 @@ int RedisSortedSet::ZADD(int val, string key)
 }
 
 // This function returns the rank of particular key in RedisSortedSet
-// Time Complexity : O(log(N))
 int RedisSortedSet::ZRANK(string key)
 {
     if(mp2.find(key)==mp2.end())
